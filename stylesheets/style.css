@@ -13,6 +13,10 @@ body {
   text-decoration: none;
 }
 
+.btn {
+  margin: 5px 0;
+}
+
 img {
   max-width: 70%;
   padding: 5px;
