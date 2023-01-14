@@ -22,6 +22,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <title>Tauggle - Tau Games</title>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  params = new URLSearchParams(window.location.search);
+  if (params.get("play")) {
+    document.getElementById("redir").innerHTML = 'You were directed here from <a href=' + params.get("play") + '>' + params.get("play") + '</a>. Install Tauggle using the links below, then click the link again to play the shared game.';
+  }
+}, false);
+</script>
 </head>
 
 <body>
@@ -50,6 +59,8 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <h1>Tauggle</h1>
+
+	<p id="redir"></p>
 
         <p>
         <a class="btn btn-success btn-lg" href="https://apps.apple.com/us/app/tauggle/id1603996143" role="button">Get free for iOS &raquo;</a>
