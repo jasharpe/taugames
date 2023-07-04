@@ -44,14 +44,14 @@ img {
 }
 
 .main-page-jumbotron {
-  background-color: #651618;
+  background-color: #673AB7;
   color: #ecf0f1;
 }
 
 /* generated */
 
 .navbar-default {
-  background-color: #651618;
+  background-color: #673AB7;
   border-color: #852f31;
 }
 .navbar-default .navbar-brand {
@@ -108,4 +108,12 @@ img {
     color: #ffbbbc;
     background-color: #852f31;
   }
+}
+
+h1, h2, .navbar-brand {
+  font-family: Righteous;
+}
+
+body {
+  padding-top: 20px;
 }

@@ -21,6 +21,12 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Righteous" />
+
+<style>
+  
+</style>
+
 <title>Tauggle - Tau Games</title>
 
 <script>
@@ -48,6 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
           </button>
           <a class="navbar-brand" href="index.html">Tau Games</a>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/blog.html">Blog</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -58,13 +69,15 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <h1>Tauggle</h1>
+        <h1>
+          Tauggle
+        </h1>
 
-	<p id="redir"></p>
+	      <p id="redir"></p>
 
         <p>
-        <a class="btn btn-success btn-lg" href="https://apps.apple.com/us/app/tauggle/id1603996143" role="button">Get free for iOS &raquo;</a>
-        <a class="btn btn-success btn-lg" href="https://play.google.com/store/apps/details?id=ca.taugames.tauggle" role="button">Get free for Android &raquo;</a>
+          <a class="btn btn-success btn-lg" href="https://apps.apple.com/us/app/tauggle/id1603996143" role="button">Get free for iOS &raquo;</a>
+          <a class="btn btn-success btn-lg" href="https://play.google.com/store/apps/details?id=ca.taugames.tauggle" role="button">Get free for Android &raquo;</a>
         </p>
       </div>
     </div>
@@ -75,17 +88,24 @@ document.addEventListener('DOMContentLoaded', function() {
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <p>Tauggle is a word search game, where you try to find words that follow twisting paths through a randomly generated board of letters.
+      <p>Tauggle is a word search game with always winnable, always interesting boards. Find words that follow twisting paths through a randomly generated board of letter tiles, with a wide variety of game modes.</p>
 
-      <img src="images/tauggle.png">
+      <div class="media">
+        <img width=50% src="/images/tauggle.png">
+      </div>
 
-      <p>I've always loved this style of word game, but have been frustrated by several flaws as a solitaire app, and have aimed to fix these problems.
+      <h2>Always winnable!</h2>
+      <ul>
+        <li><p>Unlike other games of this type, getting 100% is possible and encouraged! An <a href="/blog/hints.html">optional hint system</a> gently nudges you towards the words you’ve missed.</p></li>
+        <li><p>You should never get stuck on a word you don’t know! The entire dictionary has been <a href="/blog/dictionary.html">reviewed by hand</a> to ensure that every word is known by most people.</p></li>
+      </ul>      
 
-      <p>I’ve personally read the entire dictionary, making sure that every word in the dictionary is fairly common. I aim for you to never get stuck on a word you don’t know!
-
-      <p>A progressive (optional) hint system helps you find all the words on the board, making this one of the only apps of its kind where getting 100% of the words is possible!
-
-      <p>Game settings are flexible, allowing 3x3, 4x4, 5x5, 6x6 boards, and 3, 4, or 5 minimum letters per word. Tauggle also features an optional “Reuse Tiles” unique game mode, which allows you to use the same tile multiple times per word, unlocking a new and challenging puzzle!
+      <h2>Always interesting!</h2>
+      <ul>
+        <li><p>An innovative board generation algorithm ensures that every board has interesting words to find.</p></li>
+        <li><p>Game settings are flexible, so it never gets stale, allowing 3x3, 4x4, 5x5, 6x6 boards, and 3, 4, or 5 minimum letters per word. Also features an optional “Reuse Tiles” game mode, which allows you to use the same tile multiple times per word, unlocking a new and challenging puzzle!</p></li>
+        <li><p>Boards can be shared with others. Share particularly interesting ones you find with friends. You can also design custom boards!</p></li>
+      </ul>
     </div>
   </div>
   

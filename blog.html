@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Tau Games : 9 Suit Extended Deck">
+<meta name="description" content="Tau Games : Blog">
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -23,7 +23,16 @@
 
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Righteous" />
 
-<title>9 Suit Extended Deck - Tau Games</title>
+<title>Blog - Tau Games</title>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  params = new URLSearchParams(window.location.search);
+  if (params.get("play")) {
+    document.getElementById("redir").innerHTML = 'You were directed here from <a href=' + params.get("play") + '>' + params.get("play") + '</a>. Install Tauggle using the links below, then click the link again to play the shared game.';
+  }
+}, false);
+</script>
 </head>
 
 <body>
@@ -41,6 +50,10 @@
           </button>
           <a class="navbar-brand" href="index.html">Tau Games</a>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -51,15 +64,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <h1>9 Suit Extended Deck</h1>
-        <p>Invent games, add new depths to old favourites, or simply mix it up by using different suits and colours with this flexible extended playing card deck.</p>
-
-        <p>With 5 new suits and 4 new face cards, the possibilities are endless!</p>
-
-        <p>
-        <a class="btn btn-success btn-lg" href="http://www.drivethrucards.com/product/150325/9-Suit-Extended-Deck" role="button">Buy &raquo;</a>
-        <!-- <a class="btn btn-primary btn-lg" href="ext_deck_ideas.html" role="button">Game ideas &raquo;</a> -->
-        </p>
+        <h1>Blog</h1>
       </div>
     </div>
   </div>
@@ -69,60 +74,10 @@
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <h2>New suits and colour</h2>
-
-      <p>The deck contains 9 suits, in 3 colours, with 17 cards per suit. In addition to the 4 traditional playing card suits (hearts, diamonds, spades, and clubs), it contains cards in 5 new suits, with one extra black and red suits, and three all new blue suits:</p>
-
+      <h2>Posts</h2>
       <ul>
-        <li>Cups (black)</li>
-        <li>Shields (red)</li>
-        <li>Crowns (blue)</li>
-        <li>Bottles (blue)</li>
-        <li>Anchors (blue)</li>
+        <li>July 4, 2023 - <a href="/blog/dictionary.html">I Read the Dictionary to Make a Better Word Game</a></li>
       </ul>
-
-      <p>All the suits, plus joker:</p>
-
-      <img src="images/cards/extended/cards.png">
-
-      <p>The black suits:
-
-      <img src="images/cards/extended/black_suits.png">
-
-      <p>The blue suits:
-
-      <img src="images/cards/extended/blue_suits.png">
-
-      <p>The red suits:
-
-      <img src="images/cards/extended/red_suits.png">
-
-      <p>The number cards:
-
-      <img src="images/cards/extended/shield_numbers.png">
-
-      <h2>New face cards</h2>
-
-      <p>In addition to the traditional cards (2-10, Jack, Queen, King, Ace, and one joker in each colour), each suit in the deck also has 4 new face cards:</p>
-
-      <ul>
-        <li>Bishop</li>
-        <li>Cardinal</li>
-        <li>Pope</li>
-        <li>God</li>
-      </ul>
-
-      <p>A religious theme was chosen for the additional face cards because it was a logical extension of the medieval theme of the traditional face cards. The only power comparable to the royalty was the church.</p>
-
-      <p>The new face cards:
-
-      <img src="images/cards/extended/face_cards.png">
-
-      <h2>New possibilities</h2>
-
-      <p>In order to make the deck more flexible, each face card is marked only with a letter corresponding to its name (i.e. "J", "Q", "K", "B", "C", "P", "G"), so games are free to interpret these cards as they wish.</p>
-
-      <p><b>Design by <a href="http://gildedwhiskers.com">Gilded Whiskers</a>.</b></p>
     </div>
   </div>
 </div> <!-- /container -->
@@ -153,4 +108,3 @@ try {
 
 </body>
 </html>
-
