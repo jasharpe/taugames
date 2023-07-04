@@ -4,10 +4,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1 {
-  margin-top: 40px;
-}
-
 .unstyled-link {
   color: black;
 }
