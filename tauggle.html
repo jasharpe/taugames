@@ -35,7 +35,10 @@
 document.addEventListener('DOMContentLoaded', function() {
   params = new URLSearchParams(window.location.search);
   if (params.get("play")) {
-    document.getElementById("redir").innerHTML = 'You were directed here from <a href=' + params.get("play") + '>' + params.get("play") + '</a>. Install Tauggle using the links below, then click the link again to play the shared game.';
+    var playURL = params.get("play");
+    document.getElementById("redir").innerHTML = 'You were directed here from <a id="play" href=""></a>. Install Tauggle using the links below, then click the link again to play the shared game.';
+    $('#play').attr('href', playURL);
+    $('#play').text(playURL);
   }
 }, false);
 </script>
