@@ -61,7 +61,12 @@
       <div class="col-md-8 col-md-offset-2">
         <h1>I Read the Dictionary to Make a Better Game</h1>
 
-        <p><i>Jeremy Sharpe - July 4, 2023</i></p>
+        <div class="container">
+          <div class="row">
+            <p class="pull-right"><i>Jeremy Sharpe</i></p>
+            <p class="pull-left"><i>July 6, 2023</i></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -72,12 +77,67 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <p><i>This article discusses the development of the app <a href="/tauggle.html">Tauggle</a>. Download it for free for <a href="https://play.google.com/store/apps/details?id=ca.taugames.tauggle">Android</a> and <a href="https://apps.apple.com/us/app/tauggle/id1603996143">iOS</a>.</i></p>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <p>lorem ipsum</p>
+    
+      <p>Word games have a problem. There are too many words.</p>
+<p>Tauggle is a word search game where the player find words that follow twisting paths through a randomly generated board of letter tiles. This is a crowded category, to say the least, but I started to develop Tauggle because I was dissatisfied with every existing similar game that I tried.</p>
+<h2 id="what-s-the-point-">What’s the point?</h2>
+<p>The main problem that I wanted to solve is the lack of a realistically achievable, satisfying goal. In a word search game like Tauggle, the objective is to find as many words as possible on a given board. The logical end point for a game should be finding all of the words, but in the games I tried this is almost never possible.</p>
+<p>One reason it’s impossible to find all the words is because of a peculiar feature of word games, which is that they are dependent on the dictionary. There are around 100,000 words in the Scrabble dictionary, but most people know at most 35,000 words or so, and every person knows a slightly different set of words.</p>
+<p>This is strange game design! A seemingly complex game like chess has less than 100 rules. By contrast, Scrabble effectively has around 100,000 rules, since every individual word can be considered a rule like “The word <strong>POESY</strong> is valid.” While its mechanical rules are simple and don’t lead to as much emergent complexity as the chess rules do, Scrabble derives a large amount of complexity from this huge list of trivial rules.</p>
+<p>Large dictionaries can work fairly well for multiplayer games such as Scrabble, as long as the players have roughly similar vocabularies. A word that isn’t known by all players is implicitly disallowed, and players develop social conventions to decide which set of words they will allow. At high levels of play, Scrabble players do literally memorize the entire dictionary, but this isn’t representative of the vast majority of casual players.</p>
+<p>By constrast, large dictionaries present a game design problem for single player word games. Very roughly, if a word search game uses a dictionary similar to the Scrabble dictionary, the average player will only even know about a third of the words that exist on the board. The result of this is that the player, with perfect play, will be able to reach around 30% completion, and then have to give up.</p>
+<p>This is very unsatisfying, and in my experience playing many word search games, is what happens in practice. It’s not a question of <strong>whether</strong> I give up or not, but instead a question of <strong>when</strong> I give up. I will typically consider my effort good enough if I pass, say, 50% completion, and then start a new game.</p>
+<h2 id="a-game-should-be-winnable">A game should be winnable</h2>
+<p>With Tauggle, I wanted to create <strong>a word search game that is actually completable</strong>. Players should have the satisfying experience of reaching 100% completion and knowing definitively that it was time to start a new game. I wanted this to work for most players, on most boards.</p>
+<p>There are a couple of game design challenges with this:</p>
+<ol>
+<li><p>As described above, any word that is in the dictionary that the player doesn’t know, might prevent them from getting 100% on a board.</p>
+</li>
+<li><p>Even if the player knows all the words, they may not be able to find them all on the board in a reasonable amount of time.</p>
+</li>
+</ol>
+<p>This article discusses Tauggle’s solution to the first problem, but the second is also an interesting challenge that Tauggle tackles, and I will discuss in a future, separate article on Tauggle’s progressive hint system.</p>
+<h2 id="designing-the-dictionary">Designing the dictionary</h2>
+<p>Before I started creating a word game, I didn’t realize the extent to which dictionary selection and curation is both difficult and extremely important. After some analysis, I realized Tauggle’s dictionary needed to have a few specific properties.</p>
+<p>First, <strong>every word in the dictionary should be known by the vast majority of people</strong>. In other words, the dictionary should contain no overly obscure words. This will mean that players will, with perfect play, be able to find 100% of the words on each board and complete every game.</p>
+<p>Note that this first property is a deliberate tradeoff. Without obscure words in the dictionary, it reduces the chance for the player to feel clever. For instance, there is never a chance for the player to enter a word like <strong>POESY</strong> and feel good about knowing such an obscure word. I feel that given how critical it is for most players to be able to reach 100% completion of a board, this is the right tradeoff to make. The player can feel clever by finding all the words, rather than by finding particularly obscure words.</p>
+<p>Second, <strong>every common word should be in the dictionary</strong>. In other words, the dictionary should be complete. The player should never have the experience of finding a word that most people know, and then have the game reject it. This property is much less important than the first property, since violating it doesn’t prevent 100% completion, but contributes significantly to how satisfying the game feels.</p>
+<p>Put together, the first and second properties give us a dictionary that contains every word the average player knows, and doesn’t contain any words the average player doesn’t know.</p>
+<p>Last, <strong>the dictionary needs to be free or affordable to license</strong>. Many high quality dictionaries, such as the Scrabble dictionary, are expensive or impossible to license for commercial use.</p>
+<p>While the completeness property is less important than the obscurity property, it is possible to build a complete, non-obscure dictionary from a complete, obscure dictionary, but it is impossible to build from an incomplete, non-obscure dictionary. It is much easier to remove unwanted words from a dictionary than it is to add missing words.</p>
+<p>Therefore, the first step in building an affordable, complete, non-obcure dictionary, is to find a affordable, complete, obscure dictionary.</p>
+<h2 id="the-starting-point-for-tauggle-s-dictionary">The starting point for Tauggle’s dictionary</h2>
+<p>Fortunately, <a href="http://wordlist.aspell.net/12dicts/">such a dictionary</a> exists. 12Dicts is a collection of free English word lists by Alan Beale. After some investigation, I settled on the union of the 2of12inf and 3of6game word lists as a good starting point for Tauggle’s dictionary. In my experiments, this union seemed to satisfy the completeness property, and included both American and British variants of words (which as a Canadian, is important to me). Almost never would I check a common word and have it not be in one of these word lists.</p>
+<p>But these word lists <strong>definitely did contain large numbers of obscure words</strong>.</p>
+<h2 id="curating-the-dictionary">Curating the dictionary</h2>
+<p>My software engineer brain told me to find some scalable way to evaluate words for how common they are. For instance, for every word in the dictionary, could I check how common they are on the internet, and then remove the 20% most obscure words?</p>
+<p>My software engineer brain also knows that such an approach is very fraught. Not only might it fail to remove many obscure words that most people don’t know, but it might also remove many common words, thus breaking the completeness criteria. There are many words that are considered well known, but are rarely used, and also many words that are not well known, but may be used commonly in other contexts.</p>
+<p>The problem I faced is that the rate of obscure words in the dictionary has to be extremely low. If the player finds 199 out of 200 words, but is stuck on the last one, then they can’t reach 100% completion and Tauggle has failed at its goal of allowing satisfying completion.</p>
+<h2 id="scaling-is-overrated">Scaling is overrated</h2>
+<p>Eventually, I had the thought that perhaps <strong>I didn’t need a scalable approach</strong>. Dictionaries are finite in size. They are large but not internet large. They are closer like the size of a novel. What’s more, once dictionary curation was done, it wouldn’t need to be repeated. Thus was born the idea of simply reading the entire dictionary and manually curating it.</p>
+<p>The result of merging the 2of12inf and 3of6game word lists contains about 87,000 words. The idea would be to put all of these words, one per line, in a text file, and put a “#” symbol at the end of each word that I wanted to remove. Then, I’d run a script over this file and create a curated list of words that was the original text file with all the words with “#” at the end removed.</p>
+<p>I started by manually reviewing a few hundred words to get an idea of how long this would take. I believe my initial estimate was around 20-40 hours. This is about 1-2 seconds per word. This is quite long, but not insurmountably long for one person. By this time, I had convinced myself that manual curation was the only way to make a satisfying word search game, so I decided to do it.</p>
+<p>But the challenges didn’t stop there. I still had to decide on a specific methodology. What was the exact bar for obscurity of a word that would warrant exclusion? Would I exclude rude words?</p>
+<p>I went back to my original goal of players being able to complete games. I settled on this standard:</p>
+<blockquote>
+<p>While imagining that I&#39;m the average person: if I 99% completed a board, and this word was the only one I didn&#39;t find, would I blame myself for missing it, or the app for trying to make me find a word I didn&#39;t know?</p>
+</blockquote>
+<p>With that in mind, I set to work manually curating the dictionary.</p>
+<h2 id="the-slog-and-the-self-doubt">The slog and the self doubt</h2>
+<p>This standard sounds decent in the abstract, but I still encountered a number of problems.</p>
+<p>This approach unfortunately excludes a lot of fun words that I know. The standard above sounds good to word enthusiatics until they encounter some of the specific words that I’ve decided to remove. For example, I’ve removed the word <strong>IAMB</strong> which might offend some word enthusiasts. Ultimately, though, I had a goal in mind, that most people should be able to complete most games, and this word just isn’t in the vocabulary of plenty of people. Completing a game feels much better than it feels to get an obscure-ish word. In addition, there are still plenty of interesting, common words.</p>
+<p>Also, what makes me think I can effectively imagine the average person’s vocabulary? People from other countries, ethnic groups, genders, socioeconomic backgrounds, or with different language backgrounds, might have quite different opinions on many borderline words. For example, I was quite conscious of the idea in the last few years that <a href="https://slate.com/business/2014/06/center-for-reading-research-study-finds-different-vocabulary-words-are-known-to-only-to-men-or-women.html">men and women tend to know different words</a>. For example, practically, should I include <strong>TAFFETA</strong> or not?</p>
+<p>Another significant issue for me, separate from the results, was that <strong>this was a slog</strong>, much worse and more tedious than I’d imagined. Sometimes investigating whether I should include a borderline word would take a minute or two, instead of the second or two I’d estimated for it. I didn’t meticulously track how long the overall process took, but it required many hours over many days over the period of months, and ultimately was probably well over 40 hours.</p>
+<p>Finally, this took long enough that by the time I was done, I had significantly refined my technique, and so the end of the dictionary is much better and more efficiently curated than the beginning. I find myself puzzled over some of the choices for inclusion and exclusion of A and B words. I’ll probably need to do another pass of the first half of the dictionary once I’ve forgotten how much work it is.</p>
+<h2 id="but-did-it-work-">But… did it work?</h2>
+<p>Ultimately, you have to be the judge of that. In the end I removed about 15% of the 87,000 words in the original dictionary. </p>
+<p>In my testing, and the testing of friends, we have found it’s now possible to get 100% completion on many or all boards, with a reasonable investment of effort. I get occasional complaints about specific words (either to add or remove), but overall, the quality of the dictionary seems good.</p>
+<p>If you do play the game, feel free to send me words that you think I should add or remove at contactus@taugames.ca. Remember that they have to meet or miss the standard that I laid out above. Rarely do I add words, but I regularly remove obscure words that are pointed out to me.</p>
+<p>If you want to give Tauggle a try, download it for free for <a href="https://play.google.com/store/apps/details?id=ca.taugames.tauggle">Android</a> and <a href="https://apps.apple.com/us/app/tauggle/id1603996143">iOS</a>.</p>
+
+
+      
+
     </div>
   </div>
 
