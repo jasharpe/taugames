@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tau Games : I Read the Dictionary to Make a Better Word Game">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Righteous" />
+
+<link rel="shortcut icon" type="image/jpg" href="/favicon.png"/>
+
+<title>I Made My Game Satisfying With A Progressive Hint System - Tau Games Blog</title>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/index.html">Tau Games</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/blog.html">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>I Made My Game Satisfying With A Progressive Hint System</h1>
+
+        <div class="container">
+          <div class="row">
+            <p class="pull-right"><i>Jeremy Sharpe</i></p>
+            <p class="pull-left"><i>July 11, 2023</i></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="article col-md-8 col-md-offset-2">
+      <p><i>This article discusses the development of the app <a href="/tauggle.html">Tauggle</a>. Download it for free for <a href="https://play.google.com/store/apps/details?id=ca.taugames.tauggle">Android</a> and <a href="https://apps.apple.com/us/app/tauggle/id1603996143">iOS</a>.</i></p>
+    
+      <p>Word games have a problem. They’re too hard.</p>
+<p>Tauggle is a word search game where the player finds words that follow twisting paths through a randomly generated board of letter tiles. This is a crowded category, to say the least, but I started to develop Tauggle because I was dissatisfied with every existing similar game that I tried.</p>
+<p><img src="/images/board.png" alt="Tauggle board"></p>
+<h2 id="no-satisfying-realistic-goal">No Satisfying, Realistic Goal</h2>
+<p>It seems clear that to “win” this type of word search game as a single player game, the player should find 100% of the words on the board. Yet, this is virtually impossible in every implementation of the genre that I have played.</p>
+<p>This results in a deeply unsatisfying experience. In order to feel any sort of closure to a session, the player has to invent some threshold for completion. For instance, I might make it my goal to find just 50% of the words on any given board. This helped provide me with some goal, but was often either too easy or too hard, and ultimately I felt like with a few more minutes of effort, I might find a few more percent of the words on the board. Abandoning a game would feel like some miniature version of stopping at base camp instead of summiting Everest.</p>
+<p>This phenomenon in a popular game genre is surprising. What game designer would create a game where completion is impossible, unless this were the explicit point of the game? It would be like Mario effectively never being able to face Bowser, the player getting bogged down in increasingly tedious and difficult middle game levels.</p>
+<h2 id="why-is-the-game-design-so-bad-">Why is the Game Design So Bad?</h2>
+<p>It’s true that no one would design a game this way, and the reason it arises in word search games is because the genre started as a tabletop multiplayer game. In this format, the game is constrained to a set period of a few minutes, and the players are competing against one another, rather than against the board itself. Whichever player gets the most or best words wins.</p>
+<p>In a single player word search game, by contrast, the only natural competition is the board, since there are no other players (as an aside, you might imagine multiplayer competition in a single player word search game via shared boards, which Tauggle does support, but which I don’t consider the most common method of play).</p>
+<p>So, word search games weren’t designed to deliver satisfying gameplay, but what specific issues are there? There are a couple of main factors that make this type of word search game difficult to satisfyingly complete:</p>
+<ol>
+<li><p>Any words in the game’s dictionary that the player doesn’t know are difficult to find except by trial and error.</p>
+</li>
+<li><p>Even if the player knows all the words, they may not be able to find them all on the board in a reasonable amount of time, or without a painstaking, unfun, methodical search.</p>
+</li>
+</ol>
+<p>The first problem is solvable by sufficient curation of the game’s dictionary. In my previous article, I discussed <a href="/blog/dictionary.html">reviewing Tauggle’s dictionary by hand</a> in order to make all of the words common enough that most people should be able to find them.</p>
+<p>The second issue is conceptually harder to address. Many of the words available on the board will follow long, twisting paths through the letter tiles. These complex paths are difficult to spot, and once there are only a few words remaining to find, it can be very hard to remember which paths have already been searched in order to perform an effective search.</p>
+<p>This is hard to fix because the problem is inherent to the game design. The reason the game is fun is because of the difficulty in finding the words, but this is also what makes a board hard to complete.</p>
+<h2 id="hints-for-word-games">Hints for Word Games</h2>
+<p>The solution I found, and have implemented in Tauggle, is inspired by the hint system in <a href="https://www.nytimes.com/puzzles/spelling-bee">The New York Times’ Spelling Bee</a>. This is a very different game, but has some similarities with word search.</p>
+<p>In Spelling Bee, you are given seven letters, including one mandatory letter, and find as many words as possible by using the provided letters to form words made up of at least letters (if that explanation is too abstract, then give the game a try). Similarly to word search, in this game your task is an exhaustive search for all words that can be created from the given letters. Also similar to word search, it’s very hard verging on impossible for most people to get all of the words.</p>
+<p>Spelling Bee addresses this issue with a clever escape hatch. It publishes a set of hints for the daily puzzle. For example, here are the <a href="https://www.nytimes.com/2023/07/10/crosswords/spelling-bee-forum.html">hints for the July 10, 2023 puzzle</a>:</p>
+<p><img src="/images/spelling_bee_hints.png" alt="Spelling bee hints example"></p>
+<p>These hints require some explanation. The letters at the top (“<strong>Y</strong> A H O P R T”) are the letters from which words are formed, with the bolded one indicating the one mandatory letter. The grid at the top shows how many words of each length, with each single letter prefix, exist. For instance, there are 6 words of length 5 that begin with P. The two letter list below shows how many words exist with each two letter prefix, but omits any length information. For example, it shows that there are 3 words with the prefix PO.</p>
+<h2 id="good-hints-are-fun">Good Hints are Fun</h2>
+<p>For me, these hints work quite well. The interplay of each hint type makes them interesting to use. If I’m stuck on one hint type, I can switch to the other to try to get unstuck. Ultimately, without the hints, I’m unable to get close to fully completing a Spelling Bee puzzle. With them (and a considerable amount of effort), though, I have been able to complete a number of puzzles.</p>
+<p>What’s more, these hints don’t just make the puzzle completable, they are actually a fun enhancement to the experience. Instead of blindly trying to brute force letter combinations, you’re given something to build on, without giving too much away.</p>
+<p>I liked these hints so much that I wondered if something similar could work to fix the word search game completion problem.</p>
+<h2 id="hints-in-tauggle">Hints in Tauggle</h2>
+<p>So I implemented a similar system in Tauggle, accessible by swiping to the right on the area above the game board.</p>
+<p><img src="/images/hints.png" alt="Tauggle hints"></p>
+<p>The explanation of these is the same as for Spelling Bee. With 1-letter prefix hints, you are shown the number of words of each length with each starting letter. With 2-letter prefix hints, you are told the number of words with each 2-letter prefix, but the length information is omitted. </p>
+<p>These hints make the game a lot more doable, but don’t give away so much as to ruin the fun. I think they successfully accomplish their mission in the same way that Spelling Bee’s hints do.</p>
+<p>The only problem is that they don’t go far enough. They get you most of the way to completion, but the last few words can still be extremely hard. Often at the end, I would find myself wanting to end the game just to find out what those elusive few words were.</p>
+<h2 id="progressive-hints">Progressive Hints</h2>
+<p>So I decided to extend the system to include progressive hints that unlock as you advance through the puzzle. As you get easier words, more assistance becomes available for the harder ones.</p>
+<p><img src="/images/unlock_hints.png" alt="Unlock more hints"></p>
+<p>The first additional level of hints is 3-letter prefixes with length information omitted (very similar but more powerful than 2-letter prefix hints). There are a number of conditions to unlock these:</p>
+<ul>
+<li><p>Find 85% of all the words on the board. This condition is good for boards with large numbers of words, where it is usually quite feasible to find 85% with the assistance of the regular hints.</p>
+</li>
+<li><p>Find all of the words with fewer than 6 letters. This ensures that by the time you find all the easier words, the harder ones become doable. This is also quite useful for boards with a relatively small number of words where 85% completion is much harder to achieve.</p>
+</li>
+<li><p>Find all but the last word. I never want the player to be stuck with one word remaining, since nothing is more frustrating than that.</p>
+</li>
+<li><p>Finally, the player may simply click a button to request additional hints. This was requested by a number of playtesters who found the hint unlocking conditions above to still be a little bit too hard.</p>
+</li>
+</ul>
+<p>After some playtesting, I decided to add a final level of 4-letter prefix hints as well, these ones unlocked by finding all the words with fewer than 7 letters, by finding all but the last word, or by request.</p>
+<p><img src="/images/unlock_hints_2.png" alt="Unlock more hints"></p>
+<p>It might seem excessive to give 4-letter prefix hints. That’s a big hint! But keep in mind that these are usually for words of at least 7 letters, or very difficult to find words. In practice I’ve found a couple of things.</p>
+<p>First, it’s very satisfying to unlock a new level of hints. Unlocking hints effectively becomes a sub-goal within the game. Instead of having only 100% completion to shoot for, progressive hints create a couple of subgoals to try to achieve.</p>
+<p>Second, these progressive hints dramatically smooth the difficulty curve of the game. With non-progressive hints, or no hints at all, the difficulty starts easy, and becomes progressively harder until the end of the game. With progressive hints, the game becomes harder, and then slightly easier, and then harder, and then slightly easier, and then a bit harder, and then completed.</p>
+<p>Overall, I have found that hints, and in particular progressive hints, have made the game far more fun and satisfying than it would otherwise be. Before trying them, they seem a little bit like cheating, but I think it’s a mistake to think of them that way. Instead, they should be thought of as a satisfying solution to a game design problem inherent to single player word search games.</p>
+<p>If you want to give <a href="/tauggle.html">Tauggle</a> a try, download it for free for <a href="https://play.google.com/store/apps/details?id=ca.taugames.tauggle">Android</a> and <a href="https://apps.apple.com/us/app/tauggle/id1603996143">iOS</a>.</p>
+
+
+<hr>
+<p class="pull-left"><a href="/blog/dictionary.html">&lt;&lt; I Read the Dictionary to Make a Better Game</a></p>
+    </div>
+  </div>
+
+</div> <!-- /container -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <p class="pull-right">contactus@taugames.ca</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-63549663-1");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+</body>
+</html>
