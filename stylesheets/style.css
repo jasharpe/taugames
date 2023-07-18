@@ -17,7 +17,7 @@ body {
   margin: 5px 0;
 }
 
-img {
+img:not(.media-object) {
   max-width: 70%;
   padding: 5px;
   margin: 10px auto 10px auto;
