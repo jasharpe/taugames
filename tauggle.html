@@ -167,9 +167,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <script> 
   window.addEventListener('CookieInformationConsentGiven', function(event) { 
     if (CookieInformation.getConsentGivenFor('cookie_cat_marketing')) { 
-      getElementById('embed').innerHTML = '<iframe width="315" height="560" src="https://www.youtube-nocookie.com/embed/8rp_Iz_eRe4?si=yQr5aNJFOBHnewnl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+      document.getElementById('embed').innerHTML = '<iframe width="315" height="560" src="https://www.youtube-nocookie.com/embed/8rp_Iz_eRe4?si=yQr5aNJFOBHnewnl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
     } else {
-      getElementById('embed').innerHTML = '';
+      document.getElementById('embed').innerHTML = '';
     }
   }, false); 
 </script>  
