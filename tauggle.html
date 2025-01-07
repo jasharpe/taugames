@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <p>Tauggle is a word search game with always winnable, always interesting boards. Find words that follow twisting paths through a randomly generated board of letter tiles, with a wide variety of game modes.</p>
 
       <div style="display: flex; justify-content: space-around;">
-        <iframe width="315" height="560" src="https://www.youtube-nocookie.com/embed/8rp_Iz_eRe4?si=yQr5aNJFOBHnewnl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div id="embed"></div>
       </div>
   
       <h2>
@@ -163,6 +163,16 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 </footer>
+
+<script> 
+  window.addEventListener('CookieInformationConsentGiven', function(event) { 
+    if (CookieInformation.getConsentGivenFor('cookie_cat_marketing')) { 
+      getElementById('embed').innerHTML = '<iframe width="315" height="560" src="https://www.youtube-nocookie.com/embed/8rp_Iz_eRe4?si=yQr5aNJFOBHnewnl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+    } else {
+      getElementById('embed').innerHTML = '';
+    }
+  }, false); 
+</script>  
 
 </body>
 </html>
