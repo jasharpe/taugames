@@ -28,6 +28,13 @@
 <link rel="alternate" type="application/rss+xml" title="Tau Games Blog RSS Feed" href="http://taugames.ca/blog/rss.xml" />
 
 <style>
+
+#merchants_img {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 15px; /* Makes the corners rounded */
+}
   
 </style>
 
@@ -81,13 +88,13 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <h1>
-	  <img src="/headercapsule.png" />
+	        <img id="merchants_img" src="/headercapsule.png" />
         </h1>
 
 	      <p id="redir" style="word-wrap: break-word;"></p>
 
         <p>
-          <a class="btn btn-success btn-lg" href="https://store.steampowered.com/app/3372640/Merchants_of_the_Stars/" role="button">Steam &raquo;</a>
+          <a class="btn btn-success btn-lg" href="https://store.steampowered.com/app/3372640/Merchants_of_the_Stars/" role="button">Steam (Windows and MacOS) &raquo;</a>
           <a class="btn btn-success btn-lg" href="https://apps.apple.com/us/app/merchants-of-the-stars/id6744467339" role="button">iOS &raquo;</a>
           <a class="btn btn-success btn-lg" href="https://play.google.com/store/apps/details?id=ca.taugames.merchants" role="button">Android &raquo;</a>
         </p>
@@ -101,7 +108,10 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <p>Merchants of the Stars is a "Space Traffic Control" game where you guide ships to docks to unload cargo, while avoiding collisions with other ships, asteroids, and other obstacles.</p>
-      <p>The Merchants of the Stars demo is now available for Windows and MacOS on Steam, as well as Android and iOS.</p>
+      <p>The Merchants of the Stars demo is available now on Steam (Windows and MacOS), the Play Store (Android), and the App Store (iOS).</p>
+      <div style="display: flex; justify-content: space-around;">
+        <div id="embed"></div>
+      </div>
     </div>
   </div>
   
@@ -126,6 +136,25 @@
     </div>
   </div>
 </footer>
+
+<script> 
+  function handleConsent() {
+    if (CookieInformation.getConsentGivenFor('cookie_cat_marketing') || window.location.hostname === 'localhost') { 
+      document.getElementById('embed').innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/KDpXa02LPlY?si=o2hpX9pKydHFRh6u" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+    } else {
+      document.getElementById('embed').innerHTML = '';
+    }
+  }
+
+  console.log(window.location.hostname)
+  if (window.location.hostname === 'localhost') {
+    handleConsent();
+  }
+
+  window.addEventListener('CookieInformationConsentGiven', function(event) { 
+    handleConsent();
+  }, false);
+</script>  
 
 </body>
 </html>
