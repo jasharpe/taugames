@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"
+  data-culture="EN" data-gcm-version="2.0" type="text/javascript"></script>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tau Games : get in the hole">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<link rel="stylesheet" href="stylesheets/style.css">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Righteous" />
+
+<link rel="shortcut icon" type="image/jpg" href="/favicon.png"/>
+
+<link rel="alternate" type="application/rss+xml" title="Tau Games Blog RSS Feed" href="http://taugames.ca/blog/rss.xml" />
+
+<style>
+
+#merchants_img {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 15px; /* Makes the corners rounded */
+}
+  
+</style>
+
+<title>get in the hole - Tau Games</title>
+
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZT5PGJ0FD0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied'
+  });
+  gtag('js', new Date());
+  gtag('config', 'G-ZT5PGJ0FD0');
+</script>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Tau Games</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/blog.html">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>
+	        <img id="merchants_img" src="/headercapsule.png" />
+        </h1>
+
+	      <p id="redir" style="word-wrap: break-word;"></p>
+
+        <p>
+          <a class="btn btn-success btn-lg" href="https://store.steampowered.com/app/4174950/get_in_the_hole/" role="button">Steam (Windows and MacOS) &raquo;</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <p>A game about dumping lots of things in a hole. As you progress, get new things to put in the hole, helpers to push more stuff into the hole, and upgrades to make your pusher longer and stronger.
+</p>
+      <div style="display: flex; justify-content: space-around;">
+        <div id="embed"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h2>Support and Feedback</h2>
+      
+      <p>Please send any requests for support or feedback to <a href="mailto:contactus@taugames.ca">contactus@taugames.ca</a> and we'll do our best to help you out.
+    </div>
+  </div>
+
+</div> <!-- /container -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <p class="pull-right">contactus@taugames.ca</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> 
+  /*function handleConsent() {
+    if (CookieInformation.getConsentGivenFor('cookie_cat_marketing') || window.location.hostname === 'localhost') { 
+      document.getElementById('embed').innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/KDpXa02LPlY?si=o2hpX9pKydHFRh6u" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+    } else {
+      document.getElementById('embed').innerHTML = '';
+    }
+  }*/
+
+  console.log(window.location.hostname)
+  if (window.location.hostname === 'localhost') {
+    handleConsent();
+  }
+
+  window.addEventListener('CookieInformationConsentGiven', function(event) { 
+    handleConsent();
+  }, false);
+</script>  
+
+</body>
+</html>
